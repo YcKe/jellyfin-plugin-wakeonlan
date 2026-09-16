@@ -6,6 +6,12 @@ four-part scheme Jellyfin plugins use.
 
 ## [Unreleased]
 
+## [1.0.0.1] - 2026-09-16
+
+### Changed
+
+- New plugin GUID. Remove any previously installed copy before installing this version.
+
 ## [1.0.0.0] - 2026-09-09
 
 ### Added
@@ -16,5 +22,6 @@ four-part scheme Jellyfin plugins use.
 - Settings page with a server check and a test packet button.
 - Administrator-only endpoints `POST /Wol/Test` and `GET /Wol/Status`.
 
-[Unreleased]: https://github.com/YcKe/jellyfin-plugin-wakeonlan/compare/v1.0.0.0...HEAD
+[Unreleased]: https://github.com/YcKe/jellyfin-plugin-wakeonlan/compare/v1.0.0.1...HEAD
+[1.0.0.1]: https://github.com/YcKe/jellyfin-plugin-wakeonlan/compare/v1.0.0.0...v1.0.0.1
 [1.0.0.0]: https://github.com/YcKe/jellyfin-plugin-wakeonlan/releases/tag/v1.0.0.0
