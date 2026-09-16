@@ -28,7 +28,7 @@ namespace Jellyfin.Plugin.WakeOnLan
         public static Plugin? Instance { get; private set; }
 
         /// <inheritdoc />
-        public override string Name => "Wake-on-LAN";
+        public override string Name => "Wake-on-LAN (WOL)";
 
         /// <inheritdoc />
         public override string Description => "Wakes a sleeping storage server when a client connects or starts playback.";

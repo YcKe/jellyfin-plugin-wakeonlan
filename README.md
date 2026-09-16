@@ -2,7 +2,7 @@
   <img src="assets/logo.png" alt="Wake-on-LAN for Jellyfin" width="640">
 </p>
 
-<h1 align="center">Wake-on-LAN for Jellyfin</h1>
+<h1 align="center">Wake-on-LAN (WOL) for Jellyfin</h1>
 
 <p align="center">
   <a href="https://github.com/YcKe/jellyfin-plugin-wakeonlan/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/YcKe/jellyfin-plugin-wakeonlan/actions/workflows/ci.yml/badge.svg"></a>
@@ -43,18 +43,18 @@ requested.
    https://raw.githubusercontent.com/YcKe/jellyfin-plugin-wakeonlan/main/manifest.json
    ```
 
-3. Go to **Catalog**, open **Wake-on-LAN**, and click **Install**.
+3. Go to **Catalog**, open **Wake-on-LAN (WOL)**, and click **Install**.
 4. Restart Jellyfin when prompted.
 
 ### Manual
 
-1. Download `wake-on-lan_<version>.zip` from the [latest release](https://github.com/YcKe/jellyfin-plugin-wakeonlan/releases/latest).
+1. Download `wake-on-lan-wol_<version>.zip` from the [latest release](https://github.com/YcKe/jellyfin-plugin-wakeonlan/releases/latest).
 2. Extract it into a new folder under your Jellyfin `plugins` directory, for example `plugins/WakeOnLan_1.0.0.0/`.
 3. Restart Jellyfin.
 
 ## Configuration
 
-Open **Dashboard > Plugins > Wake-on-LAN**.
+Open **Dashboard > Plugins > Wake-on-LAN (WOL)**.
 
 | Setting | Default | What it does |
 | --- | --- | --- |

@@ -2,7 +2,7 @@
 # Jellyfin Plugin Repository Manager (jprm) build manifest.
 # `version` is the single source of truth for releases: bump it here, tag `v<version>`,
 # and the release workflow builds, packages and publishes the plugin.
-name: "Wake-on-LAN"
+name: "Wake-on-LAN (WOL)"
 guid: "4f1f54e2-6d22-4c39-be90-0cda215c64b6"
 version: "1.0.0.1"
 targetAbi: "12.0.0.0"
