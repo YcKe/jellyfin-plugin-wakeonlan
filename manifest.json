@@ -9,6 +9,14 @@
         "imageUrl": "https://raw.githubusercontent.com/YcKe/jellyfin-plugin-wakeonlan/main/assets/logo.png",
         "versions": [
             {
+                "version": "1.0.0.2",
+                "changelog": "See CHANGELOG.md in the repository.\n",
+                "targetAbi": "12.0.0.0",
+                "sourceUrl": "https://github.com/YcKe/jellyfin-plugin-wakeonlan/releases/download/v1.0.0.2/wake-on-lan-wol_1.0.0.2.zip",
+                "checksum": "21355fd79a07d0e39974452095f71dc2",
+                "timestamp": "2026-09-16T10:32:54Z"
+            },
+            {
                 "version": "1.0.0.1",
                 "changelog": "See CHANGELOG.md in the repository.\n",
                 "targetAbi": "12.0.0.0",
