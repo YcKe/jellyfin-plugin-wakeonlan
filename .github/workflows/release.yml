@@ -78,19 +78,10 @@ jobs:
           cd main-branch
           # Make sure the catalog image points at this repository regardless of who forked it.
           sed -i "s#\"imageUrl\": *\"[^\"]*\"#\"imageUrl\": \"${IMAGE_URL}\"#" manifest.json
-          jprm repo add --url="${BASE_URL}" manifest.json ../artifacts/*.zip
-          # jprm writes "<base>/<plugin>/<zip>" but GitHub release assets are flat: "<base>/<zip>".
-          python3 - <<'EOF'
-          import json, re
-          with open("manifest.json") as f:
-              manifest = json.load(f)
-          for plugin in manifest:
-              for version in plugin["versions"]:
-                  version["sourceUrl"] = re.sub(r"/[^/]+/([^/]+\.zip)$", r"/\1", version["sourceUrl"])
-          with open("manifest.json", "w") as f:
-              json.dump(manifest, f, indent=4)
-              f.write("\n")
-          EOF
+          # jprm needs an explicit directory component (a bare "manifest.json" resolves to "" and is rejected).
+          # --plugin-url points straight at the flat GitHub release asset, so nothing is copied into the repo.
+          ZIP="$(ls ../artifacts/*.zip)"
+          jprm repo add --plugin-url="${BASE_URL}/$(basename "${ZIP}")" ./manifest.json "${ZIP}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add manifest.json
