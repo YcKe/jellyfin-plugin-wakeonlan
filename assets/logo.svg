@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title">
+  <title id="title">Wake-on-LAN for Jellyfin</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9B4FBF"/>
+      <stop offset="1" stop-color="#1A8FD0"/>
+    </linearGradient>
+    <mask id="crescent">
+      <rect width="1280" height="720" fill="black"/>
+      <circle cx="300" cy="360" r="150" fill="white"/>
+      <circle cx="360" cy="300" r="130" fill="black"/>
+    </mask>
+  </defs>
+
+  <rect width="1280" height="720" rx="48" fill="url(#bg)"/>
+
+  <!-- Crescent moon: the sleeping server -->
+  <rect width="1280" height="720" fill="#FFFFFF" mask="url(#crescent)"/>
+
+  <!-- Three signal arcs: the magic packet on its way -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="26" stroke-linecap="round">
+    <path d="M 506.2 212.2 A 230 230 0 0 1 506.2 507.8"/>
+    <path d="M 559.8 167.2 A 300 300 0 0 1 559.8 552.8"/>
+    <path d="M 613.4 122.2 A 370 370 0 0 1 613.4 597.8"/>
+  </g>
+
+  <text x="700" y="335" fill="#FFFFFF" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="84" dominant-baseline="middle">Wake-on-LAN</text>
+  <text x="704" y="418" fill="#FFFFFF" fill-opacity="0.8" font-family="Segoe UI, Helvetica Neue, Arial, sans-serif" font-size="40" dominant-baseline="middle">for Jellyfin</text>
+</svg>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wake-on-LAN</title>
+</head>
+<body>
+  <div id="wolConfigurationPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button">
+    <div data-role="content">
+      <div class="content-primary">
+        <form class="wolConfigurationForm">
+
+          <div class="verticalSection verticalSection-extrabottompadding">
+            <div class="sectionTitleContainer flex align-items-center">
+              <h2 class="sectionTitle">Wake-on-LAN</h2>
+              <a is="emby-linkbutton" class="raised button-alt headerHelpButton" target="_blank" rel="noopener" href="https://github.com/YcKe/jellyfin-plugin-wakeonlan#configuration">Help</a>
+            </div>
+            <p class="fieldDescription">
+              Whenever a client connects or starts playback, the plugin checks whether your storage server is awake and sends a magic packet if it is not.
+            </p>
+          </div>
+
+          <div class="verticalSection verticalSection-extrabottompadding">
+            <h3 class="sectionTitle">Storage server</h3>
+
+            <div class="inputContainer">
+              <input is="emby-input" type="text" id="txtMacAddress" label="MAC address" placeholder="AA:BB:CC:DD:EE:FF" autocomplete="off" spellcheck="false" required />
+              <div class="fieldDescription">Colon, dash, dot or bare notations are all accepted.</div>
+            </div>
+
+            <div class="inputContainer">
+              <input is="emby-input" type="text" id="txtIpAddress" label="IP address or host name" placeholder="192.168.1.10" autocomplete="off" spellcheck="false" />
+              <div class="fieldDescription">Used to check whether the server is already awake. Leave empty to always send a packet.</div>
+            </div>
+
+            <div class="inputContainer">
+              <input is="emby-input" type="number" id="txtPort" label="Probe port (TCP)" min="1" max="65535" step="1" />
+              <div class="fieldDescription">A port the server listens on when it is up. 445 for SMB, 2049 for NFS, 22 for SSH.</div>
+            </div>
+
+            <div class="inputContainer">
+              <div id="serverStatus" class="fieldDescription" hidden></div>
+              <button is="emby-button" type="button" id="btnCheckServer" class="raised"><span>Check server</span></button>
+            </div>
+          </div>
+
+          <div class="verticalSection verticalSection-extrabottompadding">
+            <h3 class="sectionTitle">Wake-on-LAN packet</h3>
+
+            <div class="inputContainer">
+              <input is="emby-input" type="number" id="txtWOLPort" label="Magic packet port (UDP)" min="1" max="65535" step="1" />
+              <div class="fieldDescription">Almost always 9. Some devices expect 7.</div>
+            </div>
+
+            <div class="inputContainer">
+              <input is="emby-input" type="number" id="txtWOLCoolDown" label="Cooldown (seconds)" min="0" step="1" />
+              <div class="fieldDescription">Minimum time between two checks or packets. Prevents flooding the network when many clients connect at once.</div>
+            </div>
+
+            <div class="inputContainer">
+              <button is="emby-button" type="button" id="btnTest" class="raised"><span>Send test packet</span></button>
+              <div class="fieldDescription">Sends a magic packet using the values above without saving them.</div>
+            </div>
+          </div>
+
+          <div>
+            <button is="emby-button" type="submit" class="raised button-submit block"><span>Save</span></button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      (function () {
+        'use strict';
+
+        var pluginId = '4f1f54e2-6d22-4c39-be90-0cda215c64b6';
+        var page = document.getElementById('wolConfigurationPage');
+
+        function field(id) {
+          return page.querySelector('#' + id);
+        }
+
+        function readText(id) {
+          return field(id).value.trim();
+        }
+
+        function readInt(id, fallback) {
+          var value = parseInt(field(id).value, 10);
+          return isNaN(value) ? fallback : value;
+        }
+
+        function describeError(response) {
+          if (response && typeof response.text === 'function') {
+            return response.text().then(function (text) {
+              return text || (response.status + ' ' + response.statusText);
+            });
+          }
+          return Promise.resolve(String(response));
+        }
+
+        function showStatus(message, isError) {
+          var status = field('serverStatus');
+          status.textContent = message;
+          status.style.color = isError ? '#ff6b6b' : '#52b788';
+          status.hidden = false;
+        }
+
+        function loadConfiguration() {
+          Dashboard.showLoadingMsg();
+          return ApiClient.getPluginConfiguration(pluginId).then(function (config) {
+            field('txtMacAddress').value = config.MacAddress || '';
+            field('txtIpAddress').value = config.IpAddress || '';
+            field('txtPort').value = config.Port;
+            field('txtWOLPort').value = config.WOLPort;
+            field('txtWOLCoolDown').value = config.WOLCoolDown;
+            Dashboard.hideLoadingMsg();
+          }).catch(function () {
+            Dashboard.hideLoadingMsg();
+          });
+        }
+
+        function saveConfiguration(event) {
+          event.preventDefault();
+          Dashboard.showLoadingMsg();
+          ApiClient.getPluginConfiguration(pluginId).then(function (config) {
+            config.MacAddress = readText('txtMacAddress');
+            config.IpAddress = readText('txtIpAddress');
+            config.Port = readInt('txtPort', config.Port);
+            config.WOLPort = readInt('txtWOLPort', config.WOLPort);
+            config.WOLCoolDown = readInt('txtWOLCoolDown', config.WOLCoolDown);
+            return ApiClient.updatePluginConfiguration(pluginId, config);
+          }).then(Dashboard.processPluginConfigurationUpdateResult).catch(function (error) {
+            Dashboard.hideLoadingMsg();
+            describeError(error).then(function (message) {
+              Dashboard.alert('Saving failed: ' + message);
+            });
+          });
+          return false;
+        }
+
+        function sendTestPacket() {
+          ApiClient.ajax({
+            type: 'POST',
+            url: ApiClient.getUrl('Wol/Test'),
+            data: JSON.stringify({
+              MacAddress: readText('txtMacAddress'),
+              WOLPort: readInt('txtWOLPort', 9)
+            }),
+            contentType: 'application/json'
+          }).then(function () {
+            Dashboard.alert('Magic packet sent.');
+          }).catch(function (error) {
+            describeError(error).then(function (message) {
+              Dashboard.alert('Sending the magic packet failed: ' + message);
+            });
+          });
+        }
+
+        function checkServer() {
+          var host = readText('txtIpAddress');
+          var port = readInt('txtPort', 0);
+          if (!host) {
+            showStatus('Enter an IP address or host name first.', true);
+            return;
+          }
+
+          showStatus('Checking ' + host + ':' + port + ' ...', false);
+          ApiClient.getJSON(ApiClient.getUrl('Wol/Status', { host: host, port: port })).then(function (result) {
+            if (result.Online) {
+              showStatus('Online. ' + result.Host + ':' + result.Port + ' answered in ' + result.DurationMs + ' ms.', false);
+            } else {
+              showStatus('Offline. Nothing answered on ' + result.Host + ':' + result.Port + ' within the timeout.', true);
+            }
+          }).catch(function (error) {
+            describeError(error).then(function (message) {
+              showStatus('Check failed: ' + message, true);
+            });
+          });
+        }
+
+        page.querySelector('.wolConfigurationForm').addEventListener('submit', saveConfiguration);
+        field('btnTest').addEventListener('click', sendTestPacket);
+        field('btnCheckServer').addEventListener('click', checkServer);
+        page.addEventListener('pageshow', loadConfiguration);
+      })();
+    </script>
+  </div>
+</body>
+</html>

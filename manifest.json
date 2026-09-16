@@ -1,0 +1,12 @@
+[
+  {
+    "guid": "4f1f54e2-6d22-4c39-be90-0cda215c64b6",
+    "name": "Wake-on-LAN",
+    "description": "Sends a Wake-on-LAN magic packet to your NAS or storage server whenever a client connects to Jellyfin or starts playback, so media on a sleeping server is available by the time it is requested. Optionally probes a TCP port first so no packet is sent when the server is already awake.",
+    "overview": "Wake a sleeping storage server when Jellyfin needs it",
+    "owner": "YcKe",
+    "category": "General",
+    "imageUrl": "https://raw.githubusercontent.com/YcKe/jellyfin-plugin-wakeonlan/main/assets/logo.png",
+    "versions": []
+  }
+]

@@ -1,0 +1,43 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36804.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jellyfin.Plugin.WakeOnLan", "Jellyfin.Plugin.WakeOnLan\Jellyfin.Plugin.WakeOnLan.csproj", "{5DEA59D2-3D3F-4D69-803B-B7C5315D2D4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jellyfin.Plugin.WakeOnLan.Tests", "Jellyfin.Plugin.WakeOnLan.Tests\Jellyfin.Plugin.WakeOnLan.Tests.csproj", "{8F3C2B1A-6D4E-4F5A-9B7C-1E2D3C4B5A69}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C0A1F2E3-4B5C-4D6E-8F90-A1B2C3D4E5F6}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		build.yaml = build.yaml
+		CHANGELOG.md = CHANGELOG.md
+		jellyfin.ruleset = jellyfin.ruleset
+		LICENSE = LICENSE
+		manifest.json = manifest.json
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DEA59D2-3D3F-4D69-803B-B7C5315D2D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DEA59D2-3D3F-4D69-803B-B7C5315D2D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DEA59D2-3D3F-4D69-803B-B7C5315D2D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DEA59D2-3D3F-4D69-803B-B7C5315D2D4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F3C2B1A-6D4E-4F5A-9B7C-1E2D3C4B5A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F3C2B1A-6D4E-4F5A-9B7C-1E2D3C4B5A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F3C2B1A-6D4E-4F5A-9B7C-1E2D3C4B5A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F3C2B1A-6D4E-4F5A-9B7C-1E2D3C4B5A69}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D05BC959-CB35-4E1E-ADB4-A4BF2F8E0A32}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Jellyfin plugin rules" Description="Code analysis rules shared by the Jellyfin plugin projects." ToolsVersion="14.0">
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <!-- Closing parenthesis should be followed by a space -->
+    <Rule Id="SA1009" Action="None" />
+    <!-- Prefix local calls with this -->
+    <Rule Id="SA1101" Action="None" />
+    <!-- Block statements should not contain embedded comments -->
+    <Rule Id="SA1108" Action="None" />
+    <!-- Put constructor initializers on their own line -->
+    <Rule Id="SA1128" Action="None" />
+    <!-- Use lambda syntax -->
+    <Rule Id="SA1130" Action="None" />
+    <!-- Using directive should appear within a namespace declaration -->
+    <Rule Id="SA1200" Action="None" />
+    <!-- Public members must come before private members -->
+    <Rule Id="SA1202" Action="None" />
+    <!-- Static members must appear before non-static members -->
+    <Rule Id="SA1204" Action="None" />
+    <!-- Fields must not begin with an underscore -->
+    <Rule Id="SA1309" Action="None" />
+    <!-- Use trailing comma in multi-line initializers -->
+    <Rule Id="SA1413" Action="None" />
+    <!-- Single-line comments must not be followed by a blank line -->
+    <Rule Id="SA1512" Action="None" />
+    <!-- Single-line comment should be preceded by a blank line -->
+    <Rule Id="SA1515" Action="None" />
+    <!-- File header is missing -->
+    <Rule Id="SA1633" Action="None" />
+    <!-- File header copyright text -->
+    <Rule Id="SA1634" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.NetAnalyzers" RuleNamespace="Microsoft.CodeAnalysis.NetAnalyzers">
+    <!-- Specify IFormatProvider: culture bugs are silent, so fail the build -->
+    <Rule Id="CA1305" Action="Error" />
+    <!-- Do not catch general exception types: event handlers and the API boundary must never let an exception escape -->
+    <Rule Id="CA1031" Action="None" />
+    <!-- Uri parameters should not be strings -->
+    <Rule Id="CA1054" Action="None" />
+    <!-- Validate arguments of public methods: nullable reference types cover this -->
+    <Rule Id="CA1062" Action="None" />
+    <!-- Do not pass literals as localized parameters -->
+    <Rule Id="CA1303" Action="None" />
+    <!-- Identifiers should not contain underscores -->
+    <Rule Id="CA1707" Action="None" />
+    <!-- Identifiers should not have incorrect suffix -->
+    <Rule Id="CA1711" Action="None" />
+    <!-- Identifiers should not match keywords -->
+    <Rule Id="CA1716" Action="None" />
+    <!-- Identifiers should not contain type names -->
+    <Rule Id="CA1720" Action="None" />
+    <!-- Type names should not match namespaces -->
+    <Rule Id="CA1724" Action="None" />
+    <!-- Parameter names should match base declaration -->
+    <Rule Id="CA1725" Action="None" />
+    <!-- Do not initialize unnecessarily -->
+    <Rule Id="CA1805" Action="None" />
+    <!-- Internal class that is apparently never instantiated: plugin types are created by the host -->
+    <Rule Id="CA1812" Action="None" />
+    <!-- Member can be marked static -->
+    <Rule Id="CA1822" Action="None" />
+    <!-- Use the LoggerMessage delegates -->
+    <Rule Id="CA1848" Action="None" />
+    <!-- Avoid potentially expensive logging arguments: same trade-off as CA1848, readability wins here -->
+    <Rule Id="CA1873" Action="None" />
+    <!-- Do not use insecure randomness -->
+    <Rule Id="CA5394" Action="None" />
+  </Rules>
+</RuleSet>

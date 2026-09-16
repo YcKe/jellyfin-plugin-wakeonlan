@@ -1,0 +1,20 @@
+# Changelog
+
+All notable changes to this project are documented here. The format follows
+[Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and versions follow the
+four-part scheme Jellyfin plugins use.
+
+## [Unreleased]
+
+## [1.0.0.0] - 2026-09-09
+
+### Added
+
+- Wake the configured storage server when a client session starts or playback begins.
+- Optional TCP probe so no magic packet is sent when the server is already awake.
+- Cooldown between wake attempts.
+- Settings page with a server check and a test packet button.
+- Administrator-only endpoints `POST /Wol/Test` and `GET /Wol/Status`.
+
+[Unreleased]: https://github.com/YcKe/jellyfin-plugin-wakeonlan/compare/v1.0.0.0...HEAD
+[1.0.0.0]: https://github.com/YcKe/jellyfin-plugin-wakeonlan/releases/tag/v1.0.0.0

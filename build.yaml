@@ -1,0 +1,22 @@
+---
+# Jellyfin Plugin Repository Manager (jprm) build manifest.
+# `version` is the single source of truth for releases: bump it here, tag `v<version>`,
+# and the release workflow builds, packages and publishes the plugin.
+name: "Wake-on-LAN"
+guid: "4f1f54e2-6d22-4c39-be90-0cda215c64b6"
+version: "1.0.0.0"
+targetAbi: "12.0.0.0"
+framework: "net10.0"
+overview: "Wake a sleeping storage server when Jellyfin needs it"
+description: >
+  Sends a Wake-on-LAN magic packet to your NAS or storage server whenever a client
+  connects to Jellyfin or starts playback, so media on a sleeping server is available
+  by the time it is requested. Optionally probes a TCP port first so no packet is sent
+  when the server is already awake.
+category: "General"
+owner: "YcKe"
+imageUrl: "https://raw.githubusercontent.com/YcKe/jellyfin-plugin-wakeonlan/main/assets/logo.png"
+artifacts:
+  - "Jellyfin.Plugin.WakeOnLan.dll"
+changelog: >
+  See CHANGELOG.md in the repository.
